@@ -1,0 +1,53 @@
+.admin-container {
+  background-color: white;
+  min-height: 100vh;
+  width: 1350px;
+  font-family: Arial, sans-serif;
+  color: black;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.admin-main {
+  background-color: lightgrey;
+  margin: 2rem ;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 90%;
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}

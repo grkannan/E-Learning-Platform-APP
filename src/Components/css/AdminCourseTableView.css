@@ -1,0 +1,111 @@
+/* Centered page container with light background */
+/* Light background for the full page */
+body {
+  background-color: #f4f6f8;  /* subtle light gray */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Update admin container to remove bold gradient */
+.admin-container {
+  width: 1300px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Centered heading */
+.admin-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Loading text */
+.admin-loading {
+  text-align: center;
+  color: #777;
+}
+
+/* Responsive wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Clean table styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Light header */
+.admin-table thead {
+  background-color: #f1f3f5;
+  color: #212529;
+  font-weight: 600;
+}
+
+/* Table cells */
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+/* Alternate row colors */
+.admin-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.admin-table tbody tr:hover {
+  background-color: #f0f4f8;
+}
+
+/* Buttons */
+.admin-edit-btn,
+.admin-delete-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-right: 0.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-edit-btn {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.admin-edit-btn:hover {
+  background-color: #0b5ed7;
+}
+
+.admin-delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.admin-delete-btn:hover {
+  background-color: #bb2d3b;
+}
+
+/* No data row */
+.admin-no-result {
+  text-align: center;
+  padding: 1rem;
+  color: #888;
+  background-color: #f8f9fa;
+}
