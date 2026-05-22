@@ -33,7 +33,7 @@ const InstructorDashboard = () => {
   const profilePicURL = instructor?.profile_pic?.startsWith('http')
     ? instructor.profile_pic
     : instructor?.profile_pic
-      ? `http://localhost:8000${instructor.profile_pic}`
+      ? `${import.meta.env.VITE_API_BASE_URL || ''}${instructor.profile_pic}`
       : '/default-avatar.png';
 
   return (
@@ -81,8 +81,10 @@ const InstructorDashboard = () => {
             {courses.map(course => (
               <div key={course.id} className="bg-white rounded-xl shadow hover:shadow-lg transition duration-300 p-5 flex flex-col justify-between">
                 <img
-                  src={course.thumbnail ? `http://localhost:8000${course.thumbnail}` : '/default-course.png'}
+                  src={course.thumbnail?.startsWith('http') ? course.thumbnail : `${import.meta.env.VITE_API_BASE_URL || ''}${course.thumbnail}`}
                   alt={course.title}
+
+
                   className="w-full h-40 object-cover rounded-md mb-4"
                 />
                 <div className="flex-1">

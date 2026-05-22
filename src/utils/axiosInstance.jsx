@@ -2,12 +2,17 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/",
-  withCredentials: true, // 🔥 VERY IMPORTANT
+  baseURL:
+    import.meta.env.VITE_API_BASE_URL ||
+    "https://e-learning-platform-api-g41a.onrender.com",
+  withCredentials: true,
 });
 
+// If the backend uses Django's CSRF, the cookie name is typically `csrftoken`.
+// Your current cookie name is misspelled (`csrfoken`) which can break CSRF-protected POSTs.
 axiosInstance.defaults.xsrfHeaderName = "X-CSRFToken";
 axiosInstance.defaults.xsrfCookieName = "csrftoken";
+
 
 // Request: Attach token
 axiosInstance.interceptors.request.use(
@@ -36,9 +41,13 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refresh = localStorage.getItem("refresh");
-        const res = await axios.post("http://127.0.0.1:8000/api/token/refresh/", {
-          refresh: refresh,
-        });
+        const res = await axiosInstance.post(
+          "/api/token/refresh/",
+          {
+            refresh: refresh,
+          }
+        );
+
 
         const newAccess = res.data.access;
         localStorage.setItem("access", newAccess);

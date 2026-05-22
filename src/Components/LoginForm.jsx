@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/token/", form);
+      const res = await axios.post("https://e-learning-platform-api-g41a.onrender.com/api/token/", form);
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
       localStorage.setItem("user_type", res.data.user_type);

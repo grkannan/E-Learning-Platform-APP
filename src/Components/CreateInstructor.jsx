@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 
 const AddInstructorPage = () => {
   const navigate = useNavigate();
@@ -18,6 +18,9 @@ const AddInstructorPage = () => {
   });
 
   const [previewURL, setPreviewURL] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" });
+
+
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -31,13 +34,16 @@ const AddInstructorPage = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     // ✅ Confirm password validation
     if (formData.password !== formData.confirmPassword) {
-      alert("❌ Password and Confirm Password do not match.");
+      setMessage({ type: "error", text: "Password and Confirm Password do not match." });
       return;
     }
+
+
 
     const data = new FormData();
     data.append("username", formData.username);
@@ -55,15 +61,22 @@ const AddInstructorPage = () => {
     }
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/register/", data, {
+      await axiosInstance.post("/api/register/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("✅ Instructor Registered Successfully!");
+
+      setMessage({ type: "success", text: "Instructor registered successfully." });
       navigate("/admin-panel");
     } catch (error) {
-      console.error("Registration error:", error.response?.data || error.message);
-      alert("❌ Registration failed. Check console for details.");
+      const errData = error.response?.data || {};
+      const passwordErrors = errData.password?.join ? errData.password.join(" ") : "";
+      const text = passwordErrors
+        ? passwordErrors
+        : errData?.detail || errData?.message || "Registration failed. Check your input.";
+
+      setMessage({ type: "error", text });
     }
+
   };
 
   return (
@@ -74,7 +87,20 @@ const AddInstructorPage = () => {
         className="w-full max-w-xl bg-white shadow-md rounded-xl p-8"
       >
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Register Instructor</h2>
-        <p className="text-sm text-gray-600 text-center mb-4">Add a new instructor below</p>
+        <p className="text-sm text-gray-600 text-center mb-2">Add a new instructor below</p>
+
+        {message.text && (
+          <div
+            className={
+              message.type === "success"
+                ? "mb-4 text-center text-sm text-green-700"
+                : "mb-4 text-center text-sm text-red-700"
+            }
+          >
+            {message.text}
+          </div>
+        )}
+
 
         <Link
           to="/admin-panel"

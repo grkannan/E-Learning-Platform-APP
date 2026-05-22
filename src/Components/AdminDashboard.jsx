@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem("access");
 
-    axiosInstance.get("http://127.0.0.1:8000/api/instructors/", {
+    axiosInstance.get("/api/instructors/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
